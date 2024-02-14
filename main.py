@@ -1,4 +1,6 @@
 table = {}
+flag = 0
+s = None
 
 
 def create(b):
@@ -7,21 +9,27 @@ def create(b):
 
 
 def linear_prob(key, b):
-    for i in range(0, b):
-        hashl = (key + i) % 10
+    for i in range(0, b - 1):
+        hashl = (key + i) % b
         if table[ hashl ] == None:
             table[ hashl ] = key
             break
-    return hashl
+        elif table[ hashl ] == s:
+            return hashl
+        else:
+            flag = 1
 
 
 def quadratic_prob(key, b):
-    for i in range(0, b):
-        hashq = (key + (i * i)) % 10
+    for i in range(0, b - 1):
+        hashq = (key + (i * i)) % b
         if table[ hashq ] == None:
             table[ hashq ] = key
             break
-    return hashq
+        elif table[ hashq ] == s:
+            return hashq
+        else:
+            flag = 1
 
 
 def linsert(key, b):
@@ -40,19 +48,48 @@ def qinsert(key, b):
         quadratic_prob(key, b)
 
 
+def lsearch(key, b):
+    ind = linear_prob(key, b)
+    if table[ ind ] != key or flag == 1:
+        print(key, "is not present in table. ")
+    else:
+        print(key, "is present at ", ind)
+
+
+def qsearch(key, b):
+    ind = quadratic_prob(key, b)
+    if table[ ind ] != key or flag == 1:
+        print(key, "is not present in table. ")
+    else:
+        print(key, "is present at ", ind)
+
+
 b = int(input("Enter the Size of table: "))
 create(b)
+ch = input("Enter probling mode[1 - LP | 2 - QP]: ")
 while (1):
-    ch = input("Enter probling mode[1 - LP | 2 - QP]: ")
-    if ch == '1':
+    for i in range(b + 1):
+        key = int(input("\nEnter key value: "))
+        if i + 1 > b:
+            print("Table is full")
+            break
+        else:
+            if ch == '1':
+                linsert(key, b)
+            elif ch == '2':
+                qinsert(key, b)
         for i in range(b):
-            key = int(input("\nEnter key value: "))
-            linsert(key, b)
-            for i in range(b):
-                print(table[ i ], end = "|")
-    if ch == '2':
-        for i in range(b):
-            key = int(input("\nEnter key value: "))
-            qinsert(key, b)
-            for i in range(b):
-                print(table[ i ], end = "|")
+            print(table[ i ], end = "|")
+            chc = input("\nDo u want ot exit[y|n]:")
+            if chc == 'y':
+                break
+        ch1 = int(input('\nWant to search[0|1]:'))
+        if ch1 == 1:
+            s = int(input("Search value:"))
+            if ch == '1':
+                lsearch(s, b)
+                break
+            elif ch == '2':
+                qsearch(s, b)
+        else:
+            break
