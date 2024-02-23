@@ -40,3 +40,8 @@ public:
 
 	}
 };
+
+int main() {
+	tree obj;
+	obj.create();
+}
