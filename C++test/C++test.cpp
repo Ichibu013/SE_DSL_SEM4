@@ -10,7 +10,6 @@ struct node
 }*root;
 
 class tree {
-public:
 	tree() { root = NULL; }
 	void create() {
 		int books, chapters;
@@ -40,9 +39,3 @@ public:
 
 	}
 };
-
-
-int main() {
-	tree obj;
-	obj.create();
-}
