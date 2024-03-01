@@ -1,5 +1,5 @@
 #include<iostream>
-#include<string>
+
 using namespace std;
 
 struct node
@@ -27,7 +27,7 @@ public:
 			cout << "Name of the chapter " << i + 1 << ":";
 			cin.get();
 			getline(cin, root->child[i]->label);
-			cout << "Enter no of sctions in chapters :" << root->child[i]->label;
+			cout << "Enter no of sctions in chapter" << root->child[i]->label << ":";
 			cin >> root->child[i]->chno;
 			for (int j = 0; j < root->child[i]->chno; j++)
 			{
@@ -39,9 +39,30 @@ public:
 		}
 
 	}
+    void display(){
+        int tchapters;
+        if(root!=NULL){
+            cout<<"\nBook list";
+            cout<<"\nBook Title: "<<root->label;
+            tchapters=root->chno;
+            for (int i = 0; i < tchapters; i++)
+            {
+                cout<<"\nChapter "<<i+1;
+                cout<<" :"<<root->child[i]->label;
+                cout<<"\nSections :";
+                for (int j = 0; j < root->child[i]->chno; j++)
+                {
+                    cout<<"\n"<< root->child[i]->child[j]->label << "\n";
+                }
+                
+            }
+            
+        }
+    }
 };
 
 int main() {
 	tree obj;
 	obj.create();
+    obj.display();
 }
