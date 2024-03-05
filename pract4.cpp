@@ -1,6 +1,6 @@
 #include <iostream>
 #include<math.h>
-using namespace std; 
+using namespace std;
 
 struct node
 {
@@ -75,6 +75,40 @@ public:
             preorder(temp->right);
         }
     } 
+    void minmax(node *temp)
+    {
+        while (temp->left!=NULL)
+        {
+            temp=temp->left;
+        }
+        cout<<"\nMin Value = "<<temp->data<<endl;
+        
+    }
+    void search(int x, node *temp)
+    {
+        if (temp!=NULL)
+        {
+            
+        }
+        
+    }
+    void mirror(node *temp)
+    {
+        if (temp==NULL)
+        {
+            return ;
+        }
+        else
+        {
+            node *ptr;
+            mirror(temp->left);
+            mirror(temp->right);
+            ptr=temp->left;
+            temp->left=temp->right;
+            temp->right=ptr;
+        }
+        
+    }
 };
 int main()
 {
@@ -86,4 +120,8 @@ int main()
     t.postorder(t.root);
     cout<<"\nPre-Order Traversal:\t";
     t.preorder(t.root);
+    t.minmax(t.root);
+    t.mirror(t.root);
+    int w;
+    cin>>w;
 }
