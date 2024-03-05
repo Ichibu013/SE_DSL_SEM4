@@ -84,6 +84,16 @@ public:
         cout<<"\nMin Value = "<<temp->data<<endl;
         
     }
+    void display(node *temp)
+    {
+        if (temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            display(temp->left);
+            display(temp->right);
+        }
+        
+    }
     void search(int x, node *temp)
     {
         if (temp!=NULL)
@@ -114,6 +124,7 @@ int main()
 {
     tree t;
     t.input();
+    t.display(t.root);
     cout<<"\nIn-Order Traversal:\t";
     t.inorder(t.root);
     cout<<"\nPost-Order Traversal:\t";
@@ -121,7 +132,7 @@ int main()
     cout<<"\nPre-Order Traversal:\t";
     t.preorder(t.root);
     t.minmax(t.root);
-    t.mirror(t.root);
+    //t.mirror(t.root);
     int w;
     cin>>w;
 }
